@@ -1,0 +1,369 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #020617;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  height: 2000px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* CONTAINER */
+.nav-container {
+  position: relative;
+  padding: 12px 25px;
+  border-radius: 50px;
+
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+/* LINKS */
+.nav-links {
+  display: flex;
+  gap: 35px; /* 🔥 pehle 25px tha */
+  list-style: none;
+  position: relative;
+  z-index: 2;
+}
+
+/* LINKS STYLE */
+.nav-links a {
+  text-decoration: none;
+  color: #9ca3af;
+  padding: 10px 16px;
+  font-size: 17px;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-links a.active {
+  color: white;
+}
+
+/* 🔥 PERFECT CENTER HIGHLIGHT */
+.nav-highlight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px; /* 🔥 fixed width */
+  height:42px;
+  background: #2b2b5a;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+/* SCROLL STATES */
+.navbar.scrolled-light .nav-container {
+  background: rgba(255,255,255,0.07);
+}
+
+.navbar.scrolled-heavy .nav-container {
+  background: rgba(255,255,255,0.06);
+}
+
+
+/* -----------------------------Hero-------------------------- */
+
+/* HERO SECTION */
+/* HERO LAYOUT */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 80px;
+  min-height: 100vh;
+  background: #020617;
+  color: white;
+}
+
+/* LEFT */
+.hero-left {
+  max-width: 650px;
+}
+
+.hero h1 {
+  font-size: 60px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.hero h1 span {
+  color: #6366f1;
+}
+
+.intro {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #9ca3af;
+}
+
+.intro span {
+  color: #6366f1;
+  font-weight: 600;
+}
+
+/* BUTTONS */
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn.primary {
+  background: #6366f1;
+  color: white;
+}
+
+.btn.secondary {
+  border: 1px solid #444;
+  color: white;
+}
+
+/* ---------------- RESUME BUTTON PREMIUM ---------------- */
+
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 24px;
+  border-radius: 30px;
+
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+/* ICON */
+.resume-btn .icon {
+  width: 18px;
+  height: 18px;
+  stroke: white;
+  stroke-width: 2;
+  fill: none;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.resume-btn:hover {
+  background: #6366f1;
+  border-color: transparent;
+}
+
+/* ICON MOVE */
+.resume-btn:hover .icon {
+  transform: translateY(3px);
+}
+
+/* GLOW EFFECT */
+.resume-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.resume-btn:hover::before {
+  opacity: 1;
+}
+
+/* CLICK EFFECT */
+.resume-btn:active {
+  transform: scale(0.95);
+}
+
+
+/* loading state */
+.resume-btn.loading {
+  background: #6366f1;
+  border-color: transparent;
+}
+
+/* icon rotate */
+.resume-btn.loading .icon {
+  animation: spin 1s linear infinite;
+}
+
+/* animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/* ---------------- COLLAB BUTTON ---------------- */
+
+.collab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 24px;
+  border-radius: 30px;
+
+  background: #6366f1;
+  color: white;
+  text-decoration: none;
+
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+/* ICON */
+.collab-btn .icon {
+  width: 18px;
+  height: 18px;
+  stroke: white;
+  stroke-width: 2;
+  fill: none;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.collab-btn:hover {
+  background: #7c82ff;
+  transform: translateY(-2px);
+}
+
+/* GLOW */
+.collab-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.collab-btn:hover::before {
+  opacity: 1;
+}
+
+/* CLICK */
+.collab-btn:active {
+  transform: scale(0.95);
+}
+
+/* LOADING STATE */
+.collab-btn.loading {
+  background: #4f46e5;
+}
+
+/* ICON MOVE */
+.collab-btn.loading .icon {
+  transform: translateX(5px);
+}
+
+
+/* RIGHT IMAGE (NO FRAME) */
+.hero-right {
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 420px;
+  object-fit: cover;
+}
+
+#typing::after {
+  content: "|";
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* NAME highlight */
+.name {
+  color: #6366f1;
+  font-weight: 600;
+}
+
+/* TYPING TEXT */
+.typing-text {
+  font-weight: 600;
+
+  /* gradient text */
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1);
+  background-size: 200%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientMove 4s linear infinite;
+}
+
+/* gradient animation */
+@keyframes gradientMove {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
+
+/* CURSOR */
+.typing-text::after {
+  content: "|";
+  margin-left: 4px;
+  color: #6366f1;
+  animation: blink 1s infinite;
+}
+
+/* cursor blink */
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* subtle glow */
+.typing-text {
+  text-shadow: 0 0 10px rgba(99,102,241,0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-right {
+    margin-top: 40px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+}
