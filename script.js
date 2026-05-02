@@ -108,3 +108,71 @@ collabBtn.addEventListener("click", () => {
     collabBtn.classList.remove("loading");
   }, 1500);
 });
+
+const reveals = document.querySelectorAll(".about-left, .about-right, .timeline-item, .stat");
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("reveal","show");
+    }
+  });
+},{ threshold: 0.2 });
+
+reveals.forEach(el=>{
+  el.classList.add("reveal");
+  observer.observe(el);
+});
+
+
+
+const icons = document.querySelectorAll(".stat i, .timeline-item i");
+
+document.addEventListener("mousemove", (e) => {
+  let x = (e.clientX / window.innerWidth - 0.5) * 10;
+  let y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+  icons.forEach(icon => {
+    icon.style.transform = `translate(${x}px, ${y}px)`;
+  });
+});
+
+lucide.createIcons();
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  navLinks.classList.toggle("active");
+});
+
+/* close menu on click */
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    navLinks.classList.remove("active");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  if (!menuToggle || !navLinks) {
+    console.log("Navbar elements not found ❌");
+    return;
+  }
+
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    navLinks.classList.toggle("active");
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      menuToggle.classList.remove("active");
+      navLinks.classList.remove("active");
+    });
+  });
+});
