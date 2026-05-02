@@ -139,40 +139,27 @@ document.addEventListener("mousemove", (e) => {
 
 lucide.createIcons();
 
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-
-menuToggle.addEventListener("click", () => {
-  menuToggle.classList.toggle("active");
-  navLinks.classList.toggle("active");
-});
-
-/* close menu on click */
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    menuToggle.classList.remove("active");
-    navLinks.classList.remove("active");
-  });
-});
-
 document.addEventListener("DOMContentLoaded", () => {
+
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
 
   if (!menuToggle || !navLinks) {
-    console.log("Navbar elements not found ❌");
+    console.log("❌ menuToggle or navLinks not found");
     return;
   }
 
   menuToggle.addEventListener("click", () => {
-    menuToggle.classList.toggle("active");
     navLinks.classList.toggle("active");
+    menuToggle.classList.toggle("active");
   });
 
+  // close on click
   document.querySelectorAll(".nav-links a").forEach(link => {
     link.addEventListener("click", () => {
-      menuToggle.classList.remove("active");
       navLinks.classList.remove("active");
+      menuToggle.classList.remove("active");
     });
   });
+
 });
