@@ -1,8 +1,107 @@
+/* ===== EXISTING CURSOR ===== */
+const dot = document.querySelector(".cursor-dot");
+const ring = document.querySelector(".cursor-ring");
+
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  dot.style.left = mouseX + "px";
+  dot.style.top = mouseY + "px";
+
+  createTrail(mouseX, mouseY); // 🔥 trail
+});
+
+function animateCursor() {
+  ringX += (mouseX - ringX) * 0.15;
+  ringY += (mouseY - ringY) * 0.15;
+
+  ring.style.left = ringX + "px";
+  ring.style.top = ringY + "px";
+
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+
+/* ===== TRAIL EFFECT ===== */
+const trailContainer = document.getElementById("trail-container");
+
+function createTrail(x, y) {
+  const trail = document.createElement("div");
+  trail.classList.add("trail");
+
+  trail.style.left = x + "px";
+  trail.style.top = y + "px";
+
+  trailContainer.appendChild(trail);
+
+  setTimeout(() => trail.remove(), 600);
+}
+
+
+/* ===== PARTICLE EFFECT ===== */
+const canvas = document.getElementById("particle-canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+/* create particles on click */
+document.addEventListener("click", (e) => {
+  for (let i = 0; i < 20; i++) {
+    particles.push({
+      x: e.clientX,
+      y: e.clientY,
+      size: Math.random() * 4 + 2,
+      speedX: (Math.random() - 0.5) * 6,
+      speedY: (Math.random() - 0.5) * 6,
+      life: 60
+    });
+  }
+});
+
+/* animate particles */
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.life--;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(139,92,246,0.8)";
+    ctx.fill();
+
+    if (p.life <= 0) {
+      particles.splice(i, 1);
+    }
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
 const navbar = document.querySelector(".navbar");
 const links = document.querySelectorAll(".nav-links a");
 const highlight = document.querySelector(".nav-highlight");
 
+/* ===== MOVE HIGHLIGHT ===== */
 function moveHighlight(el) {
+  if (!el) return;
+
   const rect = el.getBoundingClientRect();
   const parent = el.closest(".nav-container").getBoundingClientRect();
 
@@ -12,29 +111,29 @@ function moveHighlight(el) {
     rect.left - parent.left + rect.width / 2 - highlightWidth / 2 + "px";
 }
 
-/* DEFAULT (after load) */
+/* ===== DEFAULT ===== */
 window.addEventListener("load", () => {
-  const active = document.querySelector(".nav-links a.active");
-  if (active) moveHighlight(active);
+  moveHighlight(document.querySelector(".active"));
 });
 
-/* CLICK */
+/* ===== CLICK ===== */
 links.forEach(link => {
   link.addEventListener("click", () => {
     links.forEach(l => l.classList.remove("active"));
     link.classList.add("active");
 
-    setTimeout(() => moveHighlight(link), 100); // smooth update
+    setTimeout(() => moveHighlight(link), 100);
   });
 });
 
+/* ===== SCROLL ACTIVE ===== */
 const sections = document.querySelectorAll("section");
 
 window.addEventListener("scroll", () => {
   let scrollY = window.scrollY;
 
   sections.forEach(sec => {
-    const top = sec.offsetTop - 120; // navbar offset
+    const top = sec.offsetTop - 120;
     const height = sec.offsetHeight;
     const id = sec.getAttribute("id");
 
@@ -51,6 +150,11 @@ window.addEventListener("scroll", () => {
 
     }
   });
+});
+
+/* ===== RESIZE FIX ===== */
+window.addEventListener("resize", () => {
+  moveHighlight(document.querySelector(".active"));
 });
 // --------------Hero-----------
 
