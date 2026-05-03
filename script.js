@@ -6,35 +6,52 @@ function moveHighlight(el) {
   const rect = el.getBoundingClientRect();
   const parent = el.closest(".nav-container").getBoundingClientRect();
 
-  highlight.style.left = rect.left - parent.left + rect.width / 2 - 45 + "px";
+  const highlightWidth = highlight.offsetWidth;
+
+  highlight.style.left =
+    rect.left - parent.left + rect.width / 2 - highlightWidth / 2 + "px";
 }
 
-/* Default */
-moveHighlight(document.querySelector(".active"));
+/* DEFAULT (after load) */
+window.addEventListener("load", () => {
+  const active = document.querySelector(".nav-links a.active");
+  if (active) moveHighlight(active);
+});
 
-/* Click */
+/* CLICK */
 links.forEach(link => {
   link.addEventListener("click", () => {
     links.forEach(l => l.classList.remove("active"));
     link.classList.add("active");
-    moveHighlight(link);
+
+    setTimeout(() => moveHighlight(link), 100); // smooth update
   });
 });
 
-/* Scroll states */
+const sections = document.querySelectorAll("section");
+
 window.addEventListener("scroll", () => {
-  const y = window.scrollY;
+  let scrollY = window.scrollY;
 
-  navbar.classList.remove("scrolled-light", "scrolled-heavy");
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 120; // navbar offset
+    const height = sec.offsetHeight;
+    const id = sec.getAttribute("id");
 
- if (y > 60 && y < 250) {
-  navbar.classList.add("scrolled-light");
-} 
-else if (y >= 250) {
-  navbar.classList.add("scrolled-heavy");
-}
+    if (scrollY >= top && scrollY < top + height) {
+
+      links.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + id) {
+          link.classList.add("active");
+          moveHighlight(link);
+        }
+      });
+
+    }
+  });
 });
-
 // --------------Hero-----------
 
 const heroTitle = document.querySelector(".hero-title");
@@ -163,3 +180,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
