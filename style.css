@@ -2444,13 +2444,17 @@ body {
 /* ========= RESPONSIVE STICKY NAVBAR FIX ========== */
 /* ================================================= */
 
+/* ================================================= */
+/* ============== CLEAN MOBILE NAVBAR ============== */
+/* ================================================= */
+
 @media (max-width: 768px){
 
   .navbar{
 
-    position: fixed;
+    position: fixed !important;
 
-    top: 12px;
+    top: 14px;
 
     left: 50%;
 
@@ -2467,23 +2471,27 @@ body {
 
   .nav-container{
 
-    padding: 10px 14px;
+    position: relative;
+
+    padding: 10px 16px;
 
     border-radius: 40px;
 
-    gap: 4px;
+    transform: none !important;
 
-    transform: scale(0.72); /* 🔥 size bada */
-
-    backdrop-filter: blur(14px);
+    width: auto;
 
   }
 
-  /* LINKS */
+  /* NAV LINKS */
 
   .nav-links{
 
-    gap: 4px;
+    display: flex;
+
+    gap: 6px;
+
+    align-items: center;
 
   }
 
@@ -2491,9 +2499,9 @@ body {
 
     font-size: 11px;
 
-    padding: 6px 10px;
+    padding: 7px 10px;
 
-    border-radius: 18px;
+    white-space: nowrap;
 
   }
 
@@ -2501,9 +2509,7 @@ body {
 
   .nav-highlight{
 
-    width: 62px !important;
-
-    height: 28px;
+    height: 30px;
 
     border-radius: 20px;
 
@@ -2517,7 +2523,27 @@ body {
 
   .nav-container{
 
-    transform: scale(0.66);
+    padding: 8px 12px;
+
+  }
+
+  .nav-links{
+
+    gap: 2px;
+
+  }
+
+  .nav-links a{
+
+    font-size: 10px;
+
+    padding: 6px 8px;
+
+  }
+
+  .nav-highlight{
+
+    height: 28px;
 
   }
 
