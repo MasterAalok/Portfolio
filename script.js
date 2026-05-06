@@ -285,3 +285,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+
+/* ================= PROJECT TOGGLE ================= */
+
+const categories =
+document.querySelectorAll(".project-category");
+
+categories.forEach(category => {
+
+  const btn =
+  category.querySelector(".toggle-btn");
+
+  btn.addEventListener("click", () => {
+
+    category.classList.toggle("active");
+
+  });
+
+});
+
+/* ================= FLIP CARDS ================= */
+
+const graphicCards =
+document.querySelectorAll(".graphic-card");
+
+graphicCards.forEach(card => {
+
+  card.addEventListener("click", () => {
+
+    card.classList.toggle("active");
+
+  });
+
+});
