@@ -100,15 +100,26 @@ const highlight = document.querySelector(".nav-highlight");
 
 /* ===== MOVE HIGHLIGHT ===== */
 function moveHighlight(el) {
+
   if (!el) return;
 
   const rect = el.getBoundingClientRect();
-  const parent = el.closest(".nav-container").getBoundingClientRect();
 
-  const highlightWidth = highlight.offsetWidth;
+  const parent =
+  el.closest(".nav-container")
+  .getBoundingClientRect();
+
+  /* AUTO WIDTH */
+
+  highlight.style.width =
+  rect.width + 12 + "px";
+
+  /* POSITION */
 
   highlight.style.left =
-    rect.left - parent.left + rect.width / 2 - highlightWidth / 2 + "px";
+  rect.left -
+  parent.left - 6 + "px";
+
 }
 
 /* ===== DEFAULT ===== */
@@ -156,6 +167,8 @@ window.addEventListener("scroll", () => {
 window.addEventListener("resize", () => {
   moveHighlight(document.querySelector(".active"));
 });
+
+
 // --------------Hero-----------
 
 const heroTitle = document.querySelector(".hero-title");
