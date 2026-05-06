@@ -319,3 +319,94 @@ graphicCards.forEach(card => {
   });
 
 });
+
+/* ================= CONTACT FORM ================= */
+
+const form =
+document.getElementById("contactForm");
+
+const status =
+document.getElementById("formStatus");
+
+const popup =
+document.getElementById("successPopup");
+
+const closePopup =
+document.getElementById("closePopup");
+
+
+/* ===== SUBMIT ===== */
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  const object =
+  Object.fromEntries(formData);
+
+  const json =
+  JSON.stringify(object);
+
+  status.innerHTML = "Sending message...";
+
+  try {
+
+    const response = await fetch(
+      "https://api.web3forms.com/submit",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+
+        body: json
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.success) {
+
+      /* SHOW POPUP */
+
+      popup.classList.add("show");
+
+      /* RESET FORM */
+
+      form.reset();
+
+      status.innerHTML = "";
+
+    } else {
+
+      status.innerHTML =
+      "Something went wrong ❌";
+
+    }
+
+  } catch (error) {
+
+    status.innerHTML =
+    "Network error ❌";
+
+  }
+
+});
+
+
+/* ===== CLOSE POPUP ===== */
+
+closePopup.addEventListener("click", () => {
+
+  popup.classList.remove("show");
+
+});
+
+
+/* ICONS */
+
+lucide.createIcons();
